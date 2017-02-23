@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <Encoding>UTF-8</Encoding>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p [%t] [%c{1}]:%L - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <encoder>
+            <pattern>%d %p [%t] [%c]:%L - %m%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/%d{yyyy-MM-dd-HH'.log'}</fileNamePattern>
+        </rollingPolicy>
+    <!--</appender>-->
+
+    <appender name="LOGSTASH" class="com.cwbase.logback.RedisAppender">
+        <source>SpringELK</source>
+        <type>dev-type</type>
+        <tags>dev</tags>
+        <host>127.0.0.1</host>
+        <port>6379</port>
+        <key>logstash</key>
+    </appender>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.remoting" level="WARN"/>
+    <logger name="org.springframework.scheduling.quartz" level="WARN"/>
+    <logger name="org.springframework.data.jpa" level="DEBUG"/>
+    <logger name="org.cometd" level="WARN"/>
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="com.zcj.springELK" level="DEBUG"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="LOGFILE"/>
+        <appender-ref ref="LOGSTASH" />
+    </root>
+</configuration>

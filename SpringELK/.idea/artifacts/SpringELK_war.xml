@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SpringELK:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="springELK.war">
+      <element id="artifact" artifact-name="SpringELK:war exploded" />
+    </root>
+  </artifact>
+</component>
